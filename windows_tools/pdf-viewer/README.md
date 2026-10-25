@@ -9,3 +9,7 @@
 **Pitfalls:** PDFs may contain JavaScript, links, and embedded files. Avoid enabling scripts or following unknown links. Print-to-PDF can erase evidence, so preserve the original. Extracted text may differ from the visible page.
 
 Related: [pdftotext](../pdftotext/README.md), [qpdf](../qpdf/README.md). Source: [PDF specification](https://pdfa.org/resource/iso-32000-pdf/).
+
+## Worked example: apparent blank page
+
+Open `puzzle.pdf`. Page 2 looks blank, but selecting the page with Ctrl+A reveals a selection region. Copying the selected text shows `flag{white_text}`. Confirm with `pdftotext puzzle.pdf -`. This illustrates why page rendering and extractable text must both be checked.

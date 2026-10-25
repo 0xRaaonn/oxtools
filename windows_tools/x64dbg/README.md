@@ -9,3 +9,7 @@
 **Pitfalls:** ASLR moves modules; use module-relative offsets. Debugger detection and packed code can change behavior. 32-bit and 64-bit calling conventions differ. Do not assume the GUI's comments are ground truth.
 
 Source: [x64dbg documentation](https://help.x64dbg.com/).
+
+## Worked example: examine a Windows comparison
+
+Open a copied PE challenge in x64dbg and enter `AAAA` when prompted. Search for a “Wrong” string and follow its reference to a validation function. Set an F2 breakpoint immediately before a `cmp` or `test` that controls the wrong/success branch, rerun, then inspect registers and referenced memory in Dump. Record the module-relative instruction address and the value compared. Do not treat a patched branch as the actual password.

@@ -9,3 +9,7 @@
 **Pitfalls:** Decompression may use substantial memory. Wrong file extension is common, so trust format bytes. Shell redirection must preserve binary output; WSL is safer than PowerShell for `-c >`.
 
 Source: [XZ Utils documentation](https://tukaani.org/xz/).
+
+## Worked example: unpack a disguised XZ stream
+
+Suppose `xxd -l 8 mystery.dat` begins `fd 37 7a 58 5a 00`. Run `xz -t mystery.dat` to test it, then `xz -dc mystery.dat > unpacked.bin` in WSL. Inspect `xxd -l 32 unpacked.bin` to identify the next format. If `xz -t` reports trailing garbage, inspect the original file for appended data instead of assuming the whole file is one XZ stream.

@@ -9,3 +9,7 @@
 **Pitfalls:** Low resolution, perspective distortion, and quiet-zone removal cause scan failure. Do not automatically open URLs encoded in a barcode. A displayed string may contain control characters; view raw bytes when needed.
 
 Source: [ZBar project](https://github.com/mchehab/zbar).
+
+## Worked example: read a QR image
+
+Run `zbarimg --raw qr.png`. Suppose the result is `https://example.test/flag?x=abc`. Treat it as data first: inspect the URL characters and decode any percent-encoding, then decide whether visiting that organizer-controlled address is appropriate. If scanning fails, use a clearer crop with a white quiet zone around the code.

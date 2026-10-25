@@ -9,3 +9,7 @@
 **Pitfalls:** Stripped or optimized binaries may lack readable symbols. ASLR changes runtime addresses. Windows x64 calling conventions differ from Linux. Programs may detect a debugger.
 
 Source: [GDB manual](https://sourceware.org/gdb/current/onlinedocs/gdb.html).
+
+## Worked example: inspect a comparison
+
+For a Linux challenge binary, start `gdb --args ./chall AAAAA`. Set `break strcmp`, then `run`. On x86-64 Linux, inspect arguments with `x/s $rdi` and `x/s $rsi`; one may be your input and the other a comparison value. If a breakpoint in `strcmp` does not hit, the program may compare manually or use another library routine. Continue with `finish` and inspect the return value in `$rax`.

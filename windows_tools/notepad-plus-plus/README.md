@@ -9,3 +9,7 @@
 **Pitfalls:** Opening/saving a binary file can corrupt bytes. Converting encoding or line endings alters files. Huge logs may slow the editor. A displayed “ANSI” file depends on the system code page; verify byte encoding if characters look wrong.
 
 Source: [Notepad++ user manual](https://npp-user-manual.org/).
+
+## Worked example: identify invisible characters
+
+Open `message.txt` in Notepad++, enable View → Show Symbol → Show All Characters, and inspect a suspicious line. If it contains tabs/spaces after an apparent flag, use Search → Find with a regular expression such as `[ \t]+$` to find trailing whitespace. Compare with the original bytes in HxD before editing; whitespace can be the payload in a CTF challenge.

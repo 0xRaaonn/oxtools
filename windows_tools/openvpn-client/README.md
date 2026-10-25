@@ -11,3 +11,7 @@
 **Pitfalls:** The profile and private keys are credentials. Keep them out of writeups and public repositories.
 
 Source: [OpenVPN Connect docs](https://openvpn.net/connect-docs/).
+
+## Worked example: verify a lab tunnel
+
+Import `team.ovpn` provided by the organizer and connect. In PowerShell run `ipconfig` and find the VPN adapter address, then `Test-NetConnection 10.10.10.5 -Port 80` using the organizer's sample target. A successful TCP test confirms a route to that service; a failed test calls for checking the VPN log, route table, target IP, and target service status. Do not treat a green Connected label alone as proof of target reachability.

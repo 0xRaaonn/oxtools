@@ -11,3 +11,7 @@
 **Pitfalls:** The right-hand text column replaces nonprintable bytes with dots. `-r` expects xxd-like formatting unless using `-p`. Never infer whole-file type from extension alone.
 
 Source: [xxd manual](https://manpages.debian.org/unstable/xxd/xxd.1.en.html).
+
+## Worked example: detect a wrong file extension
+
+Run `xxd -l 16 mystery.jpg`. If the first bytes are `25 50 44 46 2D`, they spell `%PDF-`, so treat the file as a PDF despite its `.jpg` name. Open a copy in the PDF viewer and run qpdf/pdftotext. If the signature appears at a later offset, inspect whether a PDF is embedded inside another container.

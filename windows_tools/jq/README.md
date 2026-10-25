@@ -11,3 +11,7 @@
 **Pitfalls:** `jq` expects valid JSON, not arbitrary JavaScript object notation. `-s` loads all input into memory. Missing keys yield `null` unless you handle them.
 
 Source: [jq manual](https://jqlang.org/manual/).
+
+## Worked example: filter API data
+
+Given `users.json` containing `{"users":[{"name":"Ada","active":true},{"name":"Bob","active":false}]}`, run `jq -r '.users[] | select(.active) | .name' users.json`. Output is `Ada` without JSON quotes. The `[]` iterates users, `select` keeps active entries, and `-r` emits plain text. If the file contains one JSON object per line, use a filter for each line or `-s` to collect them first.

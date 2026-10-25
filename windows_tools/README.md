@@ -4,6 +4,8 @@ This is an offline first reference for the 39 tools on your allowed list. Each t
 
 Read the [offline CTF primer](OFFLINE_CTF_PRIMER.md) for shell syntax, file signatures, byte order, and complete workflows that combine tools.
 
+Every tool guide ends with a **Worked example** showing sample input, a command or GUI action, and how to check the result.
+
 ## Before you begin
 
 - Keep originals untouched. Copy evidence into a working folder and save extracted data into a separate output folder. In PowerShell: `Copy-Item .\evidence.bin .\work\evidence.bin`; `Get-FileHash .\evidence.bin -Algorithm SHA256`.

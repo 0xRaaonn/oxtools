@@ -9,3 +9,7 @@
 **Pitfalls:** Decompiler output is an interpretation, not original source. Wrong architecture, base address, or calling convention produces confusing results. Packed/encrypted code may require runtime analysis. Import as a copy and avoid executing unknown samples.
 
 Source: [Ghidra documentation](https://ghidra-sre.org/).
+
+## Worked example: trace a password check
+
+Import a challenge executable and run auto-analysis. Search for the string “Wrong password”, open its references, and inspect the surrounding function in the Decompiler. If you see a loop XORing input bytes with `0x23` before `memcmp`, rename the function to reflect that and inspect the expected byte array. Reproduce the loop in Python, then test the candidate input on the unmodified challenge executable. Confirm key and lengths in Listing assembly.

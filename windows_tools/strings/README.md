@@ -9,3 +9,7 @@
 **Pitfalls:** Compressed/encrypted data will not look readable. Short strings create false positives. A string may be unused decoy data. Windows Sysinternals Strings has different options; check the installed version.
 
 Source: [GNU strings manual](https://sourceware.org/binutils/docs/binutils/strings.html).
+
+## Worked example: find an embedded URL
+
+Run `strings -a -n 6 -t x suspect.exe` and suppose it prints `2a10 https://example.test/api`. The `2a10` value is a hexadecimal file offset. Run `xxd -s 0x2a10 -l 80 suspect.exe` to confirm the bytes and inspect neighboring data. The URL may be configuration or a decoy; trace its use in Ghidra before drawing a conclusion.

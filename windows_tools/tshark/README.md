@@ -11,3 +11,7 @@
 **Pitfalls:** Field names and follow syntax vary by version; use local `-G fields` and `-z help`. Packet fields can repeat, producing multi-value output. Preserve original capture.
 
 Source: [TShark manual](https://www.wireshark.org/docs/man-pages/tshark.html).
+
+## Worked example: extract DNS names
+
+Run `tshark -r capture.pcapng -Y 'dns.flags.response == 0' -T fields -e frame.number -e dns.qry.name`. Suppose frame `84` asks for `ZmxhZw.example.test`. Decode the leading label separately and then inspect frame 84 in Wireshark to verify the packet and source host. If a query name appears twice, check retransmissions rather than counting it as two distinct messages.

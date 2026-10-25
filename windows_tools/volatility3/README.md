@@ -9,3 +9,7 @@
 **Pitfalls:** Volatility 3 plugin names and flags differ from Volatility 2. Symbols may need downloads or a local cache. A missing process in pslist does not prove absence; cross-check with scan-style plugins and acquisition timing. Memory images can contain sensitive data.
 
 Sources: [Volatility 3 README](https://github.com/volatilityfoundation/volatility3), [documentation](https://volatility3.readthedocs.io/en/latest/).
+
+## Worked example: suspicious process in RAM
+
+Run `vol -f memory.raw windows.info` to identify the image, then `vol -f memory.raw windows.pstree`. Suppose `powershell.exe` appears under an unusual parent PID `4120`. Run `vol -f memory.raw windows.cmdline` and `vol -f memory.raw windows.netscan`, then correlate that PID with a command line and remote connection. A single plugin result is a lead; verify with timestamps and related artifacts.

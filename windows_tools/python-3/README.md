@@ -21,3 +21,19 @@ Useful modules: `re`, `json`, `csv`, `hashlib`, `itertools`, `collections`, `zip
 **Pitfalls:** `str` is Unicode text; `bytes` is raw data. Decode only with a known encoding. `eval` and `pickle.load` can execute untrusted content.
 
 Source: [Python standard library](https://docs.python.org/3/library/).
+
+## Worked example: decode repeating XOR
+
+Suppose `cipher.bin` was XORed with one unknown byte. This script prints candidates beginning with the known PNG signature:
+
+```python
+from pathlib import Path
+data = Path('cipher.bin').read_bytes()
+for key in range(256):
+    plain = bytes(b ^ key for b in data)
+    if plain.startswith(bytes.fromhex('89504e470d0a1a0a')):
+        print(f'key=0x{key:02x}')
+        Path('candidate.png').write_bytes(plain)
+```
+
+Open `candidate.png` and validate it with a PNG parser; a header match alone is not enough.

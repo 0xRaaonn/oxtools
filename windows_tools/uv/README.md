@@ -9,3 +9,7 @@
 **Pitfalls:** Packages and their install scripts can execute code. The contest may permit uv while restricting packages; check its rules. `uv pip install` targets an environment, so activate one or use `--python`.
 
 Source: [uv official docs](https://docs.astral.sh/uv/).
+
+## Worked example: isolate a supplied script
+
+In the challenge folder, run `uv venv .venv`, then `uv pip install --python .venv -r requirements.txt` if the event permits those packages. Run `uv run python analyze.py` from the project, or directly `.venv\Scripts\python.exe analyze.py` on Windows. Record `uv pip list --python .venv` so your result can be reproduced. An installation failure while offline means the package is not cached or available locally.

@@ -11,3 +11,7 @@
 **Pitfalls:** Network connectivity alone does not prove frames are reaching SocketCAN. WSL may not have the required kernel CAN features. Do not point it at a production vehicle or bus.
 
 Source: [cannelloni project](https://github.com/mguentner/cannelloni).
+
+## Worked example: validate a provided CAN tunnel
+
+After starting the two cannelloni endpoints with the organizer's connection parameters, run `candump vcan0` on the receiving side. If the sender emits a known test frame `123#DEADBEEF`, the receiver should show ID `123` and four bytes `DE AD BE EF`. If no frame arrives, check interface names, transport/port, firewall, and whether the peer tunnel process is running. Use the installed `cannelloni -h` for exact startup flags.

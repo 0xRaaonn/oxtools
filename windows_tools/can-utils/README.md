@@ -11,3 +11,7 @@
 **Pitfalls:** Sending frames can affect a real bus. Use only supplied lab interfaces. WSL may lack direct SocketCAN access; analyze logs offline if so.
 
 Source: [can-utils README](https://github.com/linux-can/can-utils).
+
+## Worked example: decode a changing CAN field
+
+Given a candump log, look for frames such as `can0 123 [4] 10 27 00 00` and later `can0 123 [4] 20 27 00 00`. The first byte changed while the second stayed `27`. Test little-endian 16-bit values: `0x2710` then `0x2720`. If the challenge describes a sensor, compare periodic samples and scaling. Use `candump can0` only when the event provides an interface; do not transmit to a real bus.

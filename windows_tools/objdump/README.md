@@ -9,3 +9,7 @@
 **Pitfalls:** `-D` disassembles data sections too and may produce false code. PIE/ASLR changes runtime addresses. Supported file formats vary; check `objdump --info`.
 
 Source: [GNU objdump manual](https://sourceware.org/binutils/docs/binutils/objdump.html).
+
+## Worked example: locate a string reference
+
+Run `objdump -s -j .rodata chall` and find a message such as “Correct!”. Then run `objdump -d -M intel chall` and search the disassembly for code loading the string's address. Inspect the surrounding conditional jump to locate validation logic. For position-independent binaries, the disassembly may use RIP-relative addressing rather than an absolute address.

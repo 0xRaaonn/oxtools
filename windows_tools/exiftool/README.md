@@ -9,3 +9,7 @@
 **Pitfalls:** Metadata can be forged or stale. Writing tags changes the file and usually creates backups. Multiple tag locations can conflict. PowerShell redirection can affect binary output; prefer ExifTool's own output option or `cmd /c` redirection.
 
 Source: [ExifTool documentation](https://exiftool.org/exiftool_pod.html).
+
+## Worked example: metadata clue
+
+Run `exiftool -a -G1 -s photo.jpg`. Suppose `[EXIF] UserComment` contains `meet at 14:32` while `[EXIF] DateTimeOriginal` shows a different hour. Record both values and timezone assumptions; inspect whether the comment is a clue or ordinary metadata. Run `exiftool -b -ThumbnailImage photo.jpg` if a thumbnail is reported, saving raw bytes with a binary-safe output method.

@@ -9,3 +9,7 @@
 **Pitfalls:** Encoding is reversible without a secret; encryption needs a key. Operation order matters. Large files may exhaust browser memory.
 
 Source: [CyberChef project](https://github.com/gchq/CyberChef).
+
+## Worked example: decode a layered message
+
+Input: `ZmxhZ3t0ZXN0fQ%3D%3D`. Add **URL Decode**, then **From Base64**. URL Decode converts `%3D%3D` into `==`; From Base64 yields `flag{test}`. If you reverse those two operations, Base64 fails or produces the wrong bytes. Use the output pane to verify each layer before adding the next.

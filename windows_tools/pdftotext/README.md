@@ -9,3 +9,7 @@
 **Pitfalls:** PDF drawing order need not match reading order. A password-protected file may need a supplied password. White or clipped text can appear in extraction despite being invisible.
 
 Source: [Poppler pdftotext manual](https://manpages.debian.org/testing/poppler-utils/pdftotext.1.en.html).
+
+## Worked example: text hidden by layout
+
+Run `pdftotext -layout report.pdf report.txt` and inspect `report.txt`. Suppose a flag appears as characters spread across columns. Run `pdftotext -raw report.pdf raw.txt` and compare reading order. If neither produces text from a page, it may be scanned artwork; inspect it in a PDF viewer and look for embedded images or annotations.

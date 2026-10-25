@@ -24,3 +24,7 @@
 **Pitfalls:** Artifacts are incomplete and can be cleaned or overwritten. A Prefetch entry does not by itself prove user intent; a registry key's timestamp may reflect a container change rather than the exact action. Some tools need maps/config files kept next to the executable. Check installed tool versions and per-tool help.
 
 Sources: [official tool catalog](https://ericzimmerman.github.io/), [EvtxECmd documentation](https://github.com/EricZimmerman/evtx).
+
+## Worked example: correlate execution evidence
+
+Given `Security.evtx` and a Prefetch folder, run `.\EvtxECmd.exe -f .\Security.evtx --csv .\out` and `.\PECmd.exe -d .\Prefetch --csv .\out` in PowerShell. Open the CSVs in Timeline Explorer or filter them with Python. If Prefetch shows `TOOL.EXE` and an event log shows a related process event near the same time, correlate timestamps, path, user, and host before concluding what ran. Prefetch alone is not a complete execution history.

@@ -11,3 +11,7 @@
 **Pitfalls:** Zeek logs summarize observations and may omit incomplete or unsupported traffic. No log entry does not prove no packet existed. Analyze a copy and keep output per case.
 
 Source: [Zeek documentation](https://docs.zeek.org/en/current/).
+
+## Worked example: find a suspicious DNS query
+
+In an empty output directory run `zeek -r ../capture.pcapng`. Open `dns.log` and find an unusual query such as `ZmxhZw.example.test`. The leading label resembles Base64; decode it in CyberChef or Python and then verify the corresponding DNS packet in Wireshark. Zeek gives the lead; the PCAP proves what was actually transmitted.

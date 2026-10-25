@@ -9,3 +9,7 @@
 **Pitfalls:** Editing the DOM only changes your browser view. Client code and console output can be attacker controlled. Extensions and service workers can affect requests; use a clean profile when behavior conflicts with the network trace.
 
 Source: [Chrome DevTools docs](https://developer.chrome.com/docs/devtools/).
+
+## Worked example: inspect a form request
+
+Open a challenge page, press F12, select **Network**, enable **Preserve log**, and submit a harmless sample value `test123`. Select the new request and inspect method, URL, request body, response status, and Set-Cookie. If the page says “incorrect” but the response JSON includes another field, that field is a lead. Change one input at a time and compare the resulting requests.

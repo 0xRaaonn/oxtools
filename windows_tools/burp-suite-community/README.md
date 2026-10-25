@@ -11,3 +11,7 @@
 **Pitfalls:** Burp's proxy will not see traffic from programs not configured to use it. A browser may cache responses. Some apps use certificate pinning or non-HTTP protocols. Disable interception when you just want to browse normally.
 
 Source: [PortSwigger Burp documentation](https://portswigger.net/burp/documentation).
+
+## Worked example: compare two requests
+
+In Burp's built-in browser, submit a challenge form with `id=1`. In Proxy → HTTP history, send the request to Repeater. Change only `id=1` to `id=2` and send. Compare response status, length, body, and headers; a response difference identifies a parameter worth investigating. Save both raw requests/responses in your notes so you can reproduce the result.

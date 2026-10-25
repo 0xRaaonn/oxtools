@@ -9,3 +9,7 @@
 **Pitfalls:** Rewriting a PDF can change object numbers and discard malformed tricks, so keep the original. qpdf does not do OCR. Password-protected files need the provided password unless a weakness is part of the task.
 
 Source: [qpdf manual](https://qpdf.readthedocs.io/en/stable/).
+
+## Worked example: extract a PDF attachment
+
+Run `qpdf --check puzzle.pdf` and `qpdf --list-attachments puzzle.pdf`. Suppose it lists an attachment key `payload.txt`. Run `qpdf --show-attachment=payload.txt puzzle.pdf > payload.txt` in WSL, then inspect the saved file. If the exact key includes unusual characters, copy it exactly from qpdf's listing. Preserve `puzzle.pdf` because rewriting PDFs can change object layout.

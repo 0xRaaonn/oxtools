@@ -11,3 +11,7 @@
 **Pitfalls:** A password or server host key is not enough to decrypt a modern SSH capture. Version mismatches and missing symbols are common. Never publish recovered session keys.
 
 Source: [Fox-IT project README](https://github.com/fox-it/OpenSSH-Session-Key-Recovery).
+
+## Worked example: key recovery decision path
+
+Suppose a challenge provides `linux.mem` and `ssh.pcapng`. First use Volatility 3 to confirm the image can be analyzed and that an active `sshd`/`ssh` process exists. Add the Fox-IT plugin and OpenSSH symbols via `-p` and `-s`, list available plugins, and run the relevant recovery plugin using its local help. If it outputs key material, match cipher, direction, and rekey interval to the PCAP before attempting decryption. A recovered key from a different session will not decode the traffic.

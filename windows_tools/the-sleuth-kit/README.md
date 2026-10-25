@@ -9,3 +9,7 @@
 **Pitfalls:** Offsets for `-o` are usually sectors, not bytes. Deleted filenames and content may be partially overwritten. Output redirection should be binary-safe; WSL is simplest.
 
 Source: [The Sleuth Kit manual](https://www.sleuthkit.org/sleuthkit/docs.php).
+
+## Worked example: recover a deleted file
+
+Suppose `mmls disk.img` shows a FAT/NTFS partition beginning at sector `2048`. Run `fls -rd -o 2048 disk.img` and find a deleted entry with metadata address `42`. Extract with `icat -o 2048 disk.img 42 > recovered.bin` in WSL. Inspect `recovered.bin` with `xxd` and hash it. If contents are damaged, the entry may have been overwritten; the listing alone does not guarantee recovery.

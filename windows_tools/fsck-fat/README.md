@@ -9,3 +9,7 @@
 **Pitfalls:** A dirty filesystem is not automatically corrupt. Repair can alter directory entries and allocation chains, potentially removing evidence. `-n` may report issues it cannot fully resolve without writing; use it for triage only. It is not a file carving tool.
 
 Source: [dosfstools project](https://github.com/dosfstools/dosfstools).
+
+## Worked example: diagnose a FAT image safely
+
+Copy `fat.img` to `fat-work.img`. Run `fsck.fat -n -v fat.img` and save the report. Suppose it reports an orphaned cluster chain. Run `fsck.fat -r fat-work.img` only on the copy to inspect proposed repairs interactively. Compare before/after hashes and recover files from both versions; a repair may make a directory mountable while also changing allocation evidence.
