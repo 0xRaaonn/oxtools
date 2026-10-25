@@ -13,3 +13,13 @@ Source: [CyberChef project](https://github.com/gchq/CyberChef).
 ## Worked example: decode a layered message
 
 Input: `ZmxhZ3t0ZXN0fQ%3D%3D`. Add **URL Decode**, then **From Base64**. URL Decode converts `%3D%3D` into `==`; From Base64 yields `flag{test}`. If you reverse those two operations, Base64 fails or produces the wrong bytes. Use the output pane to verify each layer before adding the next.
+
+## More CTF scenario questions
+
+### A string looks like Base64 but decoding gives gzip bytes. What next?
+
+In CyberChef, apply **From Base64**, inspect the hex output for gzip magic `1F 8B`, then add **Gunzip**. A readable flag after decompression confirms both layers; if magic differs, identify that format before guessing.
+
+### A repeated ciphertext may use one-byte XOR. How do I test it?
+
+Use **XOR** with a one-byte hex key and test candidate values against a known prefix such as `flag{`. Confirm the entire output is coherent; random keys can produce short readable fragments.

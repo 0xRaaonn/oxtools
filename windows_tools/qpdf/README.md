@@ -13,3 +13,13 @@ Source: [qpdf manual](https://qpdf.readthedocs.io/en/stable/).
 ## Worked example: extract a PDF attachment
 
 Run `qpdf --check puzzle.pdf` and `qpdf --list-attachments puzzle.pdf`. Suppose it lists an attachment key `payload.txt`. Run `qpdf --show-attachment=payload.txt puzzle.pdf > payload.txt` in WSL, then inspect the saved file. If the exact key includes unusual characters, copy it exactly from qpdf's listing. Preserve `puzzle.pdf` because rewriting PDFs can change object layout.
+
+## More CTF scenario questions
+
+### `qpdf --check` reports a damaged cross-reference table, but a viewer opens the PDF. What do I do?
+
+Keep the original, make a repaired copy with qpdf if possible, and compare object listings/visible pages. The repair may change object numbers or discard malformed evidence.
+
+### An attachment is listed but not visible in the page. How do I recover it?
+
+Run `qpdf --list-attachments file.pdf` and use the exact attachment key with `qpdf --show-attachment=KEY file.pdf`, saving stdout with a binary-safe method. Validate the output's file signature.

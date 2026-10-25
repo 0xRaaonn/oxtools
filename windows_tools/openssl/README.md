@@ -13,3 +13,13 @@ Source: [OpenSSL command manuals](https://docs.openssl.org/master/man1/).
 ## Worked example: inspect a public key and ciphertext
 
 Run `openssl pkey -pubin -in pub.pem -text -noout` to read RSA modulus and exponent. If the challenge provides `cipher.bin`, first determine whether it is raw bytes or Base64 text; for Base64, use `openssl base64 -d -in cipher.b64 -out cipher.bin`. Feed the key and decoded ciphertext to RsaCtfTool only if a weak-key attack is plausible. Record key size, exponent, and ciphertext byte length before trying attacks.
+
+## More CTF scenario questions
+
+### A `.pem` key says BEGIN PUBLIC KEY. Can it decrypt a ciphertext?
+
+No; inspect it with `openssl pkey -pubin -in pub.pem -text -noout`. RSA decryption needs the private key or a recoverable weakness. Identify ciphertext encoding and padding before choosing a tool.
+
+### A challenge says RSA OAEP and gives a private key. Which command family applies?
+
+Use `openssl pkeyutl -decrypt -inkey private.pem -in cipher.bin -out plain.bin -pkeyopt rsa_padding_mode:oaep`, adding OAEP digest options if specified. Check the exact padding/hash parameters; wrong settings fail or yield invalid data.

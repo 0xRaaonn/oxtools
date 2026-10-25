@@ -13,3 +13,13 @@ Source: [GDB manual](https://sourceware.org/gdb/current/onlinedocs/gdb.html).
 ## Worked example: inspect a comparison
 
 For a Linux challenge binary, start `gdb --args ./chall AAAAA`. Set `break strcmp`, then `run`. On x86-64 Linux, inspect arguments with `x/s $rdi` and `x/s $rsi`; one may be your input and the other a comparison value. If a breakpoint in `strcmp` does not hit, the program may compare manually or use another library routine. Continue with `finish` and inspect the return value in `$rax`.
+
+## More CTF scenario questions
+
+### A breakpoint at `0x401000` works once but not after restart. Why?
+
+The binary may be PIE with ASLR. Use a symbol-relative breakpoint such as `break main` or inspect mapped module addresses with `info proc mappings`, then calculate a runtime address from the module base.
+
+### The program says Wrong even though the input string looks right. What should I inspect?
+
+Break just before the compare, print both buffers as hex with `x/32xb ADDRESS` and check lengths, newline, and NUL terminator. `x/s` stops at NUL and can hide later bytes.

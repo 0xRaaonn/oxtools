@@ -13,3 +13,13 @@ Source: [The Sleuth Kit manual](https://www.sleuthkit.org/sleuthkit/docs.php).
 ## Worked example: recover a deleted file
 
 Suppose `mmls disk.img` shows a FAT/NTFS partition beginning at sector `2048`. Run `fls -rd -o 2048 disk.img` and find a deleted entry with metadata address `42`. Extract with `icat -o 2048 disk.img 42 > recovered.bin` in WSL. Inspect `recovered.bin` with `xxd` and hash it. If contents are damaged, the entry may have been overwritten; the listing alone does not guarantee recovery.
+
+## More CTF scenario questions
+
+### `mmls disk.img` shows a partition starting at sector 2048. How do I list its files?
+
+Run `fls -r -o 2048 disk.img`. Keep `-o 2048` for `istat` and `icat`; using byte offset 2048 instead of sector 2048 points to the wrong location.
+
+### A deleted filename appears but `icat` produces empty or damaged data. What happened?
+
+The metadata entry may survive while clusters were reused. Inspect `istat`, compare Autopsy's view, and search unallocated space, but report partial recovery honestly.

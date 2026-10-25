@@ -15,3 +15,13 @@ Source: [can-utils README](https://github.com/linux-can/can-utils).
 ## Worked example: decode a changing CAN field
 
 Given a candump log, look for frames such as `can0 123 [4] 10 27 00 00` and later `can0 123 [4] 20 27 00 00`. The first byte changed while the second stayed `27`. Test little-endian 16-bit values: `0x2710` then `0x2720`. If the challenge describes a sensor, compare periodic samples and scaling. Use `candump can0` only when the event provides an interface; do not transmit to a real bus.
+
+## More CTF scenario questions
+
+### Several CAN IDs repeat every 100 ms. How do I find the changing signal?
+
+Group candump lines by ID, compare payload byte positions across timestamps, and test little/big-endian numeric interpretations. A changing byte could be a counter or checksum, not the measured value.
+
+### A frame is written `123#DEADBEEF`. What does it mean?
+
+It is standard ID `0x123` with four data bytes `DE AD BE EF` in cansend syntax. Do not treat the ID as an IP address or assume the payload's byte order without protocol context.

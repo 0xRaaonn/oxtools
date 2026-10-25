@@ -15,3 +15,13 @@ Source: [RsaCtfTool project](https://github.com/RsaCtfTool/RsaCtfTool).
 ## Worked example: weak RSA modulus
 
 Given `pub.pem` and `cipher.bin`, inspect `pub.pem` with `openssl pkey -pubin -in pub.pem -text -noout`. Run `RsaCtfTool --publickey pub.pem --private`. If it recovers a private key, run the installed tool's documented decipher command against `cipher.bin` and inspect raw bytes before text decoding. A successful factorization is meaningful only if the recovered key's public modulus matches the original.
+
+## More CTF scenario questions
+
+### RsaCtfTool finds factors for `n`. What should I verify?
+
+Multiply the recovered factors to confirm `n`, derive or inspect the private key, then test decryption with the correct padding. A factorization alone does not specify ciphertext encoding.
+
+### The tool finds no attack. Does that prove RSA is secure?
+
+No. It means the attempted strategies found nothing under their assumptions. Recheck key format, shared moduli, ciphertext size, low-exponent conditions, and whether another part of the challenge supplies leaked data.

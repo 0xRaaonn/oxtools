@@ -28,3 +28,13 @@ Sources: [official tool catalog](https://ericzimmerman.github.io/), [EvtxECmd do
 ## Worked example: correlate execution evidence
 
 Given `Security.evtx` and a Prefetch folder, run `.\EvtxECmd.exe -f .\Security.evtx --csv .\out` and `.\PECmd.exe -d .\Prefetch --csv .\out` in PowerShell. Open the CSVs in Timeline Explorer or filter them with Python. If Prefetch shows `TOOL.EXE` and an event log shows a related process event near the same time, correlate timestamps, path, user, and host before concluding what ran. Prefetch alone is not a complete execution history.
+
+## More CTF scenario questions
+
+### A Prefetch file exists for a program. Does that prove a person opened it?
+
+Use PECmd to parse path/run information, then correlate event logs, LNK/Jump Lists, and user context. Prefetch supports execution inference but does not establish user intent by itself.
+
+### An EVTX event and MFT change occur at the same clock time. Can I join them directly?
+
+Parse with EvtxECmd and MFTECmd, normalize timezone and timestamp precision, then compare host, path, user, and event meaning. Similar timestamps can be coincidental.

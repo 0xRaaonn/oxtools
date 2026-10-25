@@ -37,3 +37,13 @@ for key in range(256):
 ```
 
 Open `candidate.png` and validate it with a PNG parser; a header match alone is not enough.
+
+## More CTF scenario questions
+
+### Four bytes are `78 56 34 12`. What integer do they represent?
+
+Use `int.from_bytes(bytes.fromhex('78 56 34 12'), 'little')` to get `0x12345678`. Try big-endian only if the format specifies it, and compare against expected ranges or headers.
+
+### A script reads a file as UTF-8 and crashes on byte `FF`. What changed?
+
+The file is binary or another encoding. Read with `Path('file.bin').read_bytes()`, inspect hex, then decode only the text field with a known encoding. Using replacement characters can hide evidence.

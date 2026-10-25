@@ -13,3 +13,13 @@ Source: [Poppler pdftotext manual](https://manpages.debian.org/testing/poppler-u
 ## Worked example: text hidden by layout
 
 Run `pdftotext -layout report.pdf report.txt` and inspect `report.txt`. Suppose a flag appears as characters spread across columns. Run `pdftotext -raw report.pdf raw.txt` and compare reading order. If neither produces text from a page, it may be scanned artwork; inspect it in a PDF viewer and look for embedded images or annotations.
+
+## More CTF scenario questions
+
+### `pdftotext` produces an empty file. Is the PDF empty?
+
+Open the PDF visually. If the page is scanned artwork, there may be no text layer; inspect images/attachments with a viewer or qpdf. pdftotext does not perform OCR.
+
+### A table extracts in a nonsensical order. What option helps?
+
+Compare default output with `pdftotext -layout file.pdf layout.txt` and `-raw`. PDF text drawing order and visual reading order can differ; verify important values on the rendered page.

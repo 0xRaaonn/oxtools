@@ -15,3 +15,13 @@ Source: [Zeek documentation](https://docs.zeek.org/en/current/).
 ## Worked example: find a suspicious DNS query
 
 In an empty output directory run `zeek -r ../capture.pcapng`. Open `dns.log` and find an unusual query such as `ZmxhZw.example.test`. The leading label resembles Base64; decode it in CyberChef or Python and then verify the corresponding DNS packet in Wireshark. Zeek gives the lead; the PCAP proves what was actually transmitted.
+
+## More CTF scenario questions
+
+### Zeek creates `conn.log` but no `http.log`. Is there no web traffic?
+
+Check ports and protocol detection in the PCAP. The traffic may be HTTPS, incomplete, non-HTTP, or encoded on an unusual port. Use Wireshark to inspect a representative stream.
+
+### `files.log` reports a transferred file. How do I get it?
+
+Find the file UID and corresponding connection, then use Wireshark's Export Objects or configure Zeek's file extraction policy. `files.log` is metadata; it is not the file bytes.

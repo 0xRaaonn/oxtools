@@ -13,3 +13,13 @@ Source: [dosfstools project](https://github.com/dosfstools/dosfstools).
 ## Worked example: diagnose a FAT image safely
 
 Copy `fat.img` to `fat-work.img`. Run `fsck.fat -n -v fat.img` and save the report. Suppose it reports an orphaned cluster chain. Run `fsck.fat -r fat-work.img` only on the copy to inspect proposed repairs interactively. Compare before/after hashes and recover files from both versions; a repair may make a directory mountable while also changing allocation evidence.
+
+## More CTF scenario questions
+
+### A FAT image fails to mount. Should I run automatic repair?
+
+First run `fsck.fat -n -v image.img` for a read-only diagnosis and save the report. Repair only a copy with `-r` or `-a`, then compare both images and recovered files.
+
+### fsck reports an orphaned chain. Is that the flag file?
+
+It is only unreferenced allocated data. Recover/inspect it, identify its format, and compare with directory metadata and prompt. Do not assume every orphan is meaningful.

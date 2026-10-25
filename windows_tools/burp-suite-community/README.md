@@ -15,3 +15,13 @@ Source: [PortSwigger Burp documentation](https://portswigger.net/burp/documentat
 ## Worked example: compare two requests
 
 In Burp's built-in browser, submit a challenge form with `id=1`. In Proxy → HTTP history, send the request to Repeater. Change only `id=1` to `id=2` and send. Compare response status, length, body, and headers; a response difference identifies a parameter worth investigating. Save both raw requests/responses in your notes so you can reproduce the result.
+
+## More CTF scenario questions
+
+### A request fails only when replayed in Repeater. What might be missing?
+
+Compare Cookie, CSRF token, Origin, Referer, and body encoding with a fresh browser request. Update only the changing token and resend; Repeater does not automatically reproduce every browser state.
+
+### Two responses both say 200, but one is successful. How do I compare?
+
+Use Repeater/Comparer to compare body, length, redirect headers, Set-Cookie, and timing. An HTTP status alone does not define application success.

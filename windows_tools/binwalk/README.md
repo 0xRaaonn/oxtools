@@ -23,3 +23,13 @@ with ZipFile('embedded.zip') as archive:
 ```
 
 Use the actual reported offset. `testzip()` returning `None` means the member CRC checks passed.
+
+## More CTF scenario questions
+
+### binwalk reports a ZIP header inside a JPEG. Is it real?
+
+Inspect the reported offset with xxd, carve from that offset into a new file, then test it with an archive parser. A `PK` byte sequence alone is not enough.
+
+### Automatic extraction produced many folders. How do I identify the intended payload?
+
+Read binwalk's offsets and output names, validate each candidate's format, and compare content with the challenge prompt. Keep an extraction log; nested signatures often produce duplicates.

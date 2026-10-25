@@ -13,3 +13,13 @@ Source: [x64dbg documentation](https://help.x64dbg.com/).
 ## Worked example: examine a Windows comparison
 
 Open a copied PE challenge in x64dbg and enter `AAAA` when prompted. Search for a “Wrong” string and follow its reference to a validation function. Set an F2 breakpoint immediately before a `cmp` or `test` that controls the wrong/success branch, rerun, then inspect registers and referenced memory in Dump. Record the module-relative instruction address and the value compared. Do not treat a patched branch as the actual password.
+
+## More CTF scenario questions
+
+### A breakpoint address moves after restarting a Windows PE. Why?
+
+ASLR moves the loaded module. Record an RVA/module-relative offset, then set the breakpoint against that module in the new run.
+
+### The compare routine sees `AAAA\r\n` although I typed `AAAA`. What caused it?
+
+Input APIs may include line endings. Inspect exact buffer bytes and length in Dump before deriving a password; a hidden CR/LF can explain a failed comparison.

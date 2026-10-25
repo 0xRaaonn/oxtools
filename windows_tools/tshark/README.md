@@ -15,3 +15,13 @@ Source: [TShark manual](https://www.wireshark.org/docs/man-pages/tshark.html).
 ## Worked example: extract DNS names
 
 Run `tshark -r capture.pcapng -Y 'dns.flags.response == 0' -T fields -e frame.number -e dns.qry.name`. Suppose frame `84` asks for `ZmxhZw.example.test`. Decode the leading label separately and then inspect frame 84 in Wireshark to verify the packet and source host. If a query name appears twice, check retransmissions rather than counting it as two distinct messages.
+
+## More CTF scenario questions
+
+### How do I list all DNS query names without opening Wireshark?
+
+Run `tshark -r file.pcapng -Y 'dns.flags.response == 0' -T fields -e frame.number -e dns.qry.name`. Inspect frame numbers for retransmissions and verify suspicious names in packets.
+
+### A field extraction prints several values in one row. Is the output corrupt?
+
+A packet can contain repeated occurrences of a field. Set an aggregator/separator with `-E` or use full packet output; check `tshark -G fields` for exact field names.

@@ -13,3 +13,13 @@ Source: [Autopsy user documentation](https://www.autopsy.com/support/).
 ## Worked example: locate a deleted note
 
 Create an Autopsy case and add `disk.img` as a data source. After ingest, browse **Deleted Files** and search for `notes.txt`. Inspect its metadata, content preview, and directory path; export it to the case output folder. Compare the recovered bytes with `icat` if you need an inode-level cross-check. An empty preview can mean missing clusters or an ingest limitation, not necessarily an empty original file.
+
+## More CTF scenario questions
+
+### A deleted filename appears but its preview is blank. Is there no content?
+
+Check file size, allocation status, ingest completion, and the raw inode/cluster with The Sleuth Kit. Deleted metadata can remain after content is overwritten.
+
+### Two timestamps disagree by eight hours. Which is correct?
+
+Check each artifact's storage timezone and Autopsy's display timezone, then normalize to UTC before correlating. Do not edit one timestamp to make the story fit.

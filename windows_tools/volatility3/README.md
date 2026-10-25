@@ -13,3 +13,13 @@ Sources: [Volatility 3 README](https://github.com/volatilityfoundation/volatilit
 ## Worked example: suspicious process in RAM
 
 Run `vol -f memory.raw windows.info` to identify the image, then `vol -f memory.raw windows.pstree`. Suppose `powershell.exe` appears under an unusual parent PID `4120`. Run `vol -f memory.raw windows.cmdline` and `vol -f memory.raw windows.netscan`, then correlate that PID with a command line and remote connection. A single plugin result is a lead; verify with timestamps and related artifacts.
+
+## More CTF scenario questions
+
+### `windows.pslist` misses a process mentioned in logs. Where else can I look?
+
+Try process-tree and scan-style plugins available in your version, then correlate PIDs and timestamps. A terminated or unlinked process may not appear in the active list.
+
+### `windows.netscan` shows an IP with no obvious owner. What next?
+
+Compare PID/process tree, command line, handles or sockets where available, and packet/log evidence. Memory structures can be stale; do not assign the connection to a process from PID alone.

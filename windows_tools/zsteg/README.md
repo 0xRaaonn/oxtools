@@ -13,3 +13,13 @@ Source: [zsteg README](https://github.com/zed-0xff/zsteg).
 ## Worked example: extract a pixel payload
 
 Run `zsteg picture.png`. Suppose it reports `1b,rgb,lsb,xy .. text: "flag{pixel_bits}"`. Extract exactly that channel with `zsteg -E '1b,rgb,lsb,xy' picture.png > payload.bin`, then inspect with `xxd payload.bin`. A coherent flag in the extracted byte stream is stronger evidence than the detector's one-line guess.
+
+## More CTF scenario questions
+
+### zsteg prints a dozen English-looking fragments. Which one matters?
+
+Extract each promising descriptor with `-E` and inspect the complete byte stream. Prefer a valid file signature, coherent length, or expected flag format over a short accidental word.
+
+### The PNG has transparency. Could the alpha channel hold data?
+
+Try descriptors involving `a` or an all-method scan with `zsteg -a image.png`. Confirm extracted bytes against the original image; converting the PNG can change channel data.

@@ -13,3 +13,13 @@ Source: [ZBar project](https://github.com/mchehab/zbar).
 ## Worked example: read a QR image
 
 Run `zbarimg --raw qr.png`. Suppose the result is `https://example.test/flag?x=abc`. Treat it as data first: inspect the URL characters and decode any percent-encoding, then decide whether visiting that organizer-controlled address is appropriate. If scanning fails, use a clearer crop with a white quiet zone around the code.
+
+## More CTF scenario questions
+
+### A large image contains several QR codes. How do I avoid mixing them?
+
+Scan the image, note each result and position if the tool shows it, then crop one code at a time and rerun `zbarimg --raw`. Keep output associated with its source crop.
+
+### A QR code is visible but ZBar returns nothing. What should I change?
+
+Use an unblurred crop, restore a light quiet zone around it, and try rotation or stronger contrast on a copy. Avoid resizing with smoothing when the modules are only a few pixels wide.

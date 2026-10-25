@@ -6,6 +6,8 @@ Read the [offline CTF primer](OFFLINE_CTF_PRIMER.md) for shell syntax, file sign
 
 Every tool guide ends with a **Worked example** showing sample input, a command or GUI action, and how to check the result.
 
+Each guide also has **two additional CTF scenario questions**. For problems that use several tools, see the [practice scenarios](PRACTICE_SCENARIOS.md).
+
 ## Before you begin
 
 - Keep originals untouched. Copy evidence into a working folder and save extracted data into a separate output folder. In PowerShell: `Copy-Item .\evidence.bin .\work\evidence.bin`; `Get-FileHash .\evidence.bin -Algorithm SHA256`.

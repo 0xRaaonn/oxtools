@@ -13,3 +13,13 @@ Related: [pdftotext](../pdftotext/README.md), [qpdf](../qpdf/README.md). Source:
 ## Worked example: apparent blank page
 
 Open `puzzle.pdf`. Page 2 looks blank, but selecting the page with Ctrl+A reveals a selection region. Copying the selected text shows `flag{white_text}`. Confirm with `pdftotext puzzle.pdf -`. This illustrates why page rendering and extractable text must both be checked.
+
+## More CTF scenario questions
+
+### A PDF says it has three pages, but page three looks empty. What should I inspect?
+
+Search/select text on that page, inspect annotations and form fields, then compare with `pdftotext` output. Invisible or off-page text can still be extractable.
+
+### A PDF shows a paperclip icon. Is it part of the visible page?
+
+Open the attachment panel and save the embedded item to a separate folder. Check its filename, bytes, and type independently; an attachment need not appear in page rendering.

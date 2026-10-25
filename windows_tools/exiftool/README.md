@@ -13,3 +13,13 @@ Source: [ExifTool documentation](https://exiftool.org/exiftool_pod.html).
 ## Worked example: metadata clue
 
 Run `exiftool -a -G1 -s photo.jpg`. Suppose `[EXIF] UserComment` contains `meet at 14:32` while `[EXIF] DateTimeOriginal` shows a different hour. Record both values and timezone assumptions; inspect whether the comment is a clue or ordinary metadata. Run `exiftool -b -ThumbnailImage photo.jpg` if a thumbnail is reported, saving raw bytes with a binary-safe output method.
+
+## More CTF scenario questions
+
+### A photo has GPS tags. How can I use them safely?
+
+Run `exiftool -gps:all -a -G1 -s photo.jpg` and record coordinates plus reference hemispheres. Verify that the location fits visible content or the prompt; metadata can be edited.
+
+### The visible image and embedded thumbnail differ. Which is evidence?
+
+Use `exiftool -a -G1 -s` to confirm a thumbnail tag, extract it with a binary-safe output method, and compare both images. The thumbnail may be stale from an earlier edit.

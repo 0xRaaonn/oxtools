@@ -13,3 +13,13 @@ Source: [Microsoft WSL docs](https://learn.microsoft.com/windows/wsl/).
 ## Worked example: open a Windows file from Linux
 
 If the file is `C:\Users\Ada\Downloads\sample.bin`, start WSL and run `xxd -l 32 '/mnt/c/Users/Ada/Downloads/sample.bin'`. The displayed hex bytes should match HxD on Windows. If the command says file not found, check the Windows username, drive letter, and exact capitalization/path; WSL paths use forward slashes.
+
+## More CTF scenario questions
+
+### A Linux command cannot see a file at `C:\CTF\disk.img`. What path should I use?
+
+Use `/mnt/c/CTF/disk.img` in WSL. Run `ls -l '/mnt/c/CTF/disk.img'` first, quote spaces, and confirm file size before analysis.
+
+### A tool works in PowerShell but says command not found in WSL. Why?
+
+They have separate executables and PATHs. Run `command -v <tool>` in WSL and `Get-Command <tool>` in PowerShell; choose the environment where that permitted tool is installed.

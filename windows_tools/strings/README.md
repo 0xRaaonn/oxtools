@@ -13,3 +13,13 @@ Source: [GNU strings manual](https://sourceware.org/binutils/docs/binutils/strin
 ## Worked example: find an embedded URL
 
 Run `strings -a -n 6 -t x suspect.exe` and suppose it prints `2a10 https://example.test/api`. The `2a10` value is a hexadecimal file offset. Run `xxd -s 0x2a10 -l 80 suspect.exe` to confirm the bytes and inspect neighboring data. The URL may be configuration or a decoy; trace its use in Ghidra before drawing a conclusion.
+
+## More CTF scenario questions
+
+### No password appears in a Windows binary, but the GUI visibly uses one. What now?
+
+Try UTF-16LE scanning with `strings -a -el sample.exe`. Windows text often alternates ASCII-looking bytes with zero bytes; inspect any hit's offset in xxd.
+
+### A flag-looking string appears at offset `0x200`. Is that the answer?
+
+Check surrounding bytes with `xxd -s 0x200 -l 128` and trace code references if it is an executable. It could be an unused example, metadata, or a decoy.

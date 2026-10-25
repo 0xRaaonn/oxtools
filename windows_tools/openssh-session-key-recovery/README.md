@@ -15,3 +15,13 @@ Source: [Fox-IT project README](https://github.com/fox-it/OpenSSH-Session-Key-Re
 ## Worked example: key recovery decision path
 
 Suppose a challenge provides `linux.mem` and `ssh.pcapng`. First use Volatility 3 to confirm the image can be analyzed and that an active `sshd`/`ssh` process exists. Add the Fox-IT plugin and OpenSSH symbols via `-p` and `-s`, list available plugins, and run the relevant recovery plugin using its local help. If it outputs key material, match cipher, direction, and rekey interval to the PCAP before attempting decryption. A recovered key from a different session will not decode the traffic.
+
+## More CTF scenario questions
+
+### I have an SSH PCAP but no memory image. Can this tool decrypt it?
+
+Usually no: this project recovers session material from compatible memory. A host private key or password by itself does not reveal modern SSH session keys.
+
+### The plugin loads but recovers no key. What do I check?
+
+Confirm the memory snapshot captured an active SSH session, OpenSSH architecture/version, kernel and OpenSSH symbols, plugin compatibility, and process selection. Rekeying can mean one recovered key covers only part of a PCAP.

@@ -13,3 +13,13 @@ Source: [Chrome DevTools docs](https://developer.chrome.com/docs/devtools/).
 ## Worked example: inspect a form request
 
 Open a challenge page, press F12, select **Network**, enable **Preserve log**, and submit a harmless sample value `test123`. Select the new request and inspect method, URL, request body, response status, and Set-Cookie. If the page says “incorrect” but the response JSON includes another field, that field is a lead. Change one input at a time and compare the resulting requests.
+
+## More CTF scenario questions
+
+### A button is disabled in the page, but the challenge asks what request it sends. How can I inspect it?
+
+Use DevTools **Elements** and **Sources** to find its event handler or loaded JavaScript, then inspect Network while triggering authorized page actions. Client-side disablement is UI state; the server response determines whether an action is accepted.
+
+### A value changes after refresh. Where might it be stored?
+
+Inspect **Application** for cookies, localStorage, sessionStorage, and service workers. Compare values before/after refresh, then check Network response headers for Set-Cookie. A DOM value alone does not tell you who stored it.
