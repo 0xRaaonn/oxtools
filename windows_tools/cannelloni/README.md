@@ -1,0 +1,13 @@
+# cannelloni
+
+**Use:** tunnel Linux SocketCAN frames over a network between hosts. It is not the same as decoding CAN data; pair it with can-utils.
+
+**Concept:** One process reads a local SocketCAN interface and forwards frames over UDP or SCTP; the peer injects them into its local SocketCAN interface. The program needs matching transport/ports and a working local CAN or virtual CAN interface on each side.
+
+**Start:** Run `cannelloni -h` and inspect the README for your exact build before selecting client/server syntax; flags differ among packaged releases. A typical lab uses a local `vcan0` virtual interface and a peer address/port, then verifies traffic with `candump vcan0`. Record whether traffic is classic CAN or CAN FD and whether timestamps are preserved.
+
+**CTF workflow:** If organizers provide a tunnel endpoint, connect only to that endpoint, observe frames with candump, and send frames only when the challenge calls for it.
+
+**Pitfalls:** Network connectivity alone does not prove frames are reaching SocketCAN. WSL may not have the required kernel CAN features. Do not point it at a production vehicle or bus.
+
+Source: [cannelloni project](https://github.com/mguentner/cannelloni).
